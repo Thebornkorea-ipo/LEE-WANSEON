@@ -1,0 +1,363 @@
+body {
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    overflow-y: scroll; /* 스크롤은 가능하게 설정 */
+    animation: slideIn 1.3s ease forwards; /* 애니메이션 적용 */
+    scroll-behavior: smooth; /* 부드러운 스크롤 효과 추가 */
+}
+
+/* 스크롤바 숨기기 */
+body::-webkit-scrollbar {
+    display: none; /* Safari와 Chrome의 스크롤바 숨김 */
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        overflow-y: auto; /* 애니메이션 후 스크롤 표시 */
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 오른쪽 정렬 */
+    padding: 20px;
+    height: 100vh; /* 전체 높이 */
+}
+
+.header {
+    margin-bottom: 20px; /* 상단 여백 */
+    display: flex; /* flex 사용 */
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    width: 100%; /* 헤더의 너비를 100%로 설정 */
+}
+
+.logo {
+    width: 80px; /* 로고 크기 조정 */
+}
+
+.info-box {
+    background-color: #bf1f24; /* 보라색 배경 */
+    color: white; /* 글자 색상 */
+    border-radius: 10px;
+    padding: 30px; /* 내부 여백 */
+    text-align: center;
+    width: 84%; /* 너비 설정 */
+    height: 60vh; /* 전체 화면 높이의 60%로 설정 */
+    min-height: 350px; /* 최소 높이 설정 */
+    max-height: 350px; /* 최대 높이 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* 은은한 그림자 */
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3); /* 은은한 그림자 */
+    margin-top: -10px;
+}
+
+.icon {
+    width: 120px; /* 아이콘 크기 조정 */
+    margin-top: 20px; /* 위쪽 여백 추가 */
+    margin-bottom: 3px; /* 아이콘과 텍스트 간격 */
+}
+
+.greeting {
+    font-weight: 600; /* 폰트 두께 조정 (100, 200, 300 사용 가능) */
+    font-size: 30px; /* 글자 크기 조정 */
+    transform: scaleX(0.98); /* 가운데 정렬 */
+    letter-spacing: -0.5px;
+}
+
+.small-text {
+    font-weight: 300; /* 더 얇은 글씨로 설정 */
+    font-size: 15px; /* 작은 글씨 크기 */
+    margin-top: 22px; /* 위쪽 여백 추가 */
+    transform: scaleX(0.98); /* 가운데 정렬 */
+    letter-spacing: -0.3px;
+    opacity: 0.9;
+}
+
+.action-button {
+    margin-top: 10px; /* 버튼 위쪽 여백 */
+    padding: 10px 25px; /* 버튼 패딩 */
+    background-color: #f0f0f0; /* 버튼 배경색 */
+    color: #bf1f24; /* 글자 색상 */
+    border: none; /* 테두리 없음 */
+    border-radius: 50px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 포인터 */
+    font-size: 16px; /* 버튼 글자 크기 */
+    font-weight: 700; /* 버튼 텍스트를 굵게 설정 */
+    height: 40px; /* 원하는 버튼 높이 설정 */
+    min-width: 120px; /* 버튼 최소 너비 설정 */
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 명시적으로 적용 */
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.15); /* 은은한 그림자 */
+}
+
+.action-button:hover {
+    background-color: #e0e0e0; /* 호버 시 배경색 변경 */
+}
+
+/* 월렛 박스 확대/축소 애니메이션 */
+@keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.02); /* 살짝 더 확대 */
+    }
+    70% {
+      transform: scale(0.99); /* 축소 후 */
+    }
+    100% {
+      transform: scale(1); /* 원상 복귀 */
+    }
+}
+
+/* 월렛 박스 스타일 */
+.wallet-box {
+    background-color: white; /* 흰색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 30px; /* 내부 여백 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); /* 은은한 그림자 */
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.15); /* 은은한 그림자 */
+    width: 84%; /* 너비 설정 */
+    height: auto; /* 고정 높이 제거 */
+    max-width: 400px; /* 최대 너비 설정 */
+    margin: 20px auto; /* 중앙 정렬 및 상하 여백 */
+    text-align: left; /* 왼쪽 정렬 */
+    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1); /* 더 부드러운 애니메이션 */
+}
+
+.account-name {
+    font-size: 20px; /* 계좌명 글자 크기 */
+    font-weight: 600; /* 보통 두께 */
+    color: rgba(0, 0, 0, 0.9); /* 연한 색상 */
+    margin-bottom: -10px; /* 아래 여백을 좁힘 */
+    margin-top: 5px; /* 위쪽 여백 추가 (이 값을 조정하여 높이 조정) */
+    transform: scaleX(0.96); /* 가운데 정렬 */
+    letter-spacing: -0.4px;
+}
+
+.account-number {
+    font-size: 15px; /* 작은 글씨 크기 */
+    color: rgba(0, 0, 0, 0.5); /* 연한 색상 */
+    margin-bottom: -30px; /* 아래 여백을 좁힘 */
+    transform: scaleX(0.96); /* 가운데 정렬 */
+    letter-spacing: -0.4px;
+}
+
+.shares-value {
+    font-size: 40px; /* 크고 굵은 글씨 크기 */
+    font-weight: 700; /* 굵게 설정 */
+    color: rgba(0, 0, 0, 0.9); /* 연한 색상 */
+    margin-bottom: 10px; /* 아래 여백을 없앰 */
+    transform: scaleX(0.96); /* 가운데 정렬 */
+    letter-spacing: -0.4px;
+}
+
+/* 얇은 선 스타일 */
+.divider {
+    width: 100%;
+    border-top: 1px solid #f0f0f0;
+    margin: 12px 0;
+}
+
+/* 보유주수 및 1주의 가격 정보 스타일 */
+.shares-info, .price-info {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 5px 0;
+    transform: scaleX(0.96);
+    letter-spacing: -0.2px;
+}
+
+.button-container {
+    display: flex; /* 버튼을 가로로 정렬하기 위해 flex 사용 */
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 25px; /* 위쪽 여백 추가 */
+}
+
+.wallet-action-button {
+    margin: 0 9px; /* 버튼 간의 간격을 위한 여백 추가 */
+    padding: 15px 30px; /* 버튼 패딩 */
+    border: none; /* 테두리 없음 */
+    border-radius: 12px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 포인터 */
+    font-size: 17px; /* 버튼 글자 크기 */
+    font-weight: 400; /* 버튼 텍스트를 굵게 설정 */
+    display: flex; /* 플렉스박스 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    height: 55px; /* 원하는 버튼 높이 */
+    min-width: 146px;
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 명시적으로 적용 */
+}
+
+/* 첫 번째 버튼 스타일 */
+.button-one {
+    background-color: #f0f0f0; /* 버튼 배경색 */
+    color: #000000; /* 글자 색상 */
+}
+
+/* 두 번째 버튼 스타일 */
+.button-two {
+    background-color: #bf1f24; /* 다른 버튼 배경색 */
+    color: white; /* 글자 색상 */
+}
+
+/* 뉴스 박스 스타일 */
+.news-box {
+    position: relative; /* 자식 요소의 절대 위치를 위해 relative 설정 */
+    background-color: white; /* 흰색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 30px; /* 내부 여백 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* 은은한 그림자 */
+    width: 84%; /* 너비 설정 */
+    height: auto; /* 고정 높이 제거 */
+    max-width: 400px; /* 최대 너비 설정 */
+    margin: 20px auto; /* 중앙 정렬 및 상하 여백 */
+    text-align: left; /* 왼쪽 정렬 */
+    z-index: 1; /* 뉴스 박스의 z-index를 낮게 설정 */
+}
+
+/* 뉴스 타이틀 스타일 */
+.news-title {
+    position: relative;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.9);
+    margin-bottom: -10px;
+    transform: scaleX(0.96);
+    letter-spacing: -0.4px;
+    display: flex;
+    text-align: left;
+}
+
+/* 툴팁 아이콘 */
+.info-icon {
+    cursor: pointer;
+    margin-left: 7px;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    top: -13px; /* 툴팁의 위치 조정 */
+    left: 50%; /* 가운데 정렬 */
+    transform: translate(20%, 0); /* 가운데 정렬 보정 */
+    white-space: nowrap;
+    z-index: 20; /* 툴팁이 위에 표시되도록 설정 */
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 툴팁 활성화 시 */
+.tooltip.show {
+    visibility: visible; /* 툴팁이 보이도록 설정 */
+    opacity: 1; /* 완전한 불투명도 */
+    transform: translate(30%, 0); /* 가운데 정렬 보정 */
+}
+
+/* 이미지와 텍스트를 한 줄에 배치 */
+.news-content {
+    position: relative; /* 부모 요소의 위치를 기준으로 절대 위치 설정 */
+    z-index: 10; /* 뉴스 콘텐츠의 z-index를 높게 설정하여 툴팁이 가려지지 않도록 함 */
+    margin-bottom: 20px;
+}
+
+/* 추가 텍스트 스타일 */
+.news-text {
+    position: relative; /* 절대 위치 설정 제거 */
+    color: rgba(0, 0, 0, 0.9); /* 텍스트 색상 */
+}
+
+/* 각 줄에 대한 스타일 */
+.text-bold {
+    font-size: 30px; /* 굵은 텍스트 크기 */
+    font-weight: 900; /* 가장 굵은 두께 */
+}
+
+.text-medium {
+    font-size: 30px; /* 중간 텍스트 크기 */
+    font-weight: 800; /* 중간 두께 */
+}
+
+.text-light {
+    font-size: 30px; /* 얇은 텍스트 크기 */
+    font-weight: 600; /* 얇은 두께 */
+}
+
+/* 뉴스 이미지 스타일 */
+.news-image {
+    width: 160px; /* 이미지 크기 조절 */
+    height: auto; /* 비율 유지 */
+    position: absolute; /* 절대 위치 설정 */
+    right: -12px; /* 오른쪽 정렬 */
+    bottom: -10px; /* 아래쪽으로 약간 이동 (값을 조정하여 원하는 위치로 설정) */
+    z-index: 0; /* 이미지가 텍스트 아래에 오게 함 */
+}
+
+/* 뉴스 항목 스타일 */
+.news-items {
+    margin-top: 20px;
+}
+
+/* 카드 스타일을 적용한 뉴스 항목 */
+.news-item {
+    display: block; /* 블록 요소로 변경하여 전체 영역 클릭 가능 */
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none; /* 기본 링크 스타일 제거 */
+    color: rgba(0, 0, 0, 0.9); /* 텍스트 색상 */
+    background-color: #e7ebf4; /* 카드 배경 색상을 연한 파란색으로 변경 */
+    padding: 15px; /* 카드 내부 여백 */
+    border-radius: 8px; /* 카드 모서리 둥글게 */
+    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+    transform: scaleX(0.98);
+}
+
+.footer {
+    text-align: center; /* 가운데 정렬 */
+    padding: 0px 10; /* 위 아래 여백 */
+    color: rgba(0, 0, 0, 0.5); /* 글자 색상 설정 */
+    font-size: 13px; /* 글자 크기 설정 */
+    position: relative; /* 상대 위치 설정 */
+    bottom: 0; /* 하단에 위치 */
+    width: 100%; /* 너비 100% */
+}
+
+@media (max-width: 740px) {
+    /* 740px 이하에서 적용될 스타일 */
+    .container {
+        padding: 10px; /* 여백 조정 */
+    }
+    .info-box {
+        width: 90%; /* 인포박스의 너비를 화면의 90%로 설정 */
+        padding: 20px; /* 패딩 조정 */
+        /* 필요 시 높이 조정도 추가 */
+    }
+    .action-button {
+        font-size: 14px; /* 버튼 글자 크기 조정 */
+        padding: 8px 16px; /* 버튼 패딩 조정 */
+    }
+    /* 다른 요소들도 여기에 맞춰 조정 */
+}

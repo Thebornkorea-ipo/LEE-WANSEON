@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>내 보유주수</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="wallet.css">
+  <style>
+    .popup {
+      display: none; 
+      position: fixed;
+      z-index: 7000;
+      left: 0; top: 0; width: 100%;  min-height: 170vh;
+      overflow: visible; background-color: rgba(0, 0, 0, 0.4); padding-top: 60px;
+    }
+
+    .popup-content {
+      background-color: white; margin: 5% auto; padding: 20px; overflow: visible;
+      border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px;
+      opacity: 0; transform: translateY(-20px); transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-button {
+      color: #aaa; float: right; font-size: 28px; font-weight: bold;
+    }
+
+    .close-button:hover { color: black; cursor: pointer; }
+
+    .info-summary, .info-card {
+      display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;
+    }
+
+    .info-item {
+      background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;
+      padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease; 
+    }
+
+    .info-item:hover { transform: scale(1.02); }
+
+    .info-item h3, .info-card h3 {
+      margin: 0; font-size: 1.1em;
+    }
+
+    .info-item p, .info-card p {
+      margin: 5px 0 0; font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://i.ibb.co/wWyB75X/image.png" alt="로고" class="logo">
+    </div>
+    <div class="info-box">
+      <img src="https://i.ibb.co/7SLFZxN/image.png" alt="아이콘" class="icon">
+      <h1 class="greeting"></h1>
+      <p class="small-text">본인의 증권정보 및 보유수량을 꼭 확인해 주세요!</p>
+      <button class="action-button">확인하러 가기</button>
+    </div>
+    
+    <div class="wallet-box">
+      <h2 class="account-name"></h2>
+      <p class="account-number"></p>
+      <p class="shares-value"></p>
+      <hr class="divider">
+      <p class="shares-info"></p>
+      <p class="price-info"></p>
+      
+      <div class="button-container">
+        <button class="wallet-action-button button-one" id="infoButton">증권정보</button>
+        <button class="wallet-action-button button-two" id="contactButton">문의연결</button>
+      </div>         
+    </div>
+
+    <!-- 뉴스 제목 추가 -->
+    <div class="news-title">
+      &nbsp;&nbsp;&nbsp;뉴스박스
+      <span class="info-icon" onclick="showTooltip(event)">ⓘ</span>
+      <div class="tooltip">더본코리아 공모 관련 종합뉴스입니다.<br>최신시각: <span id="current-time"></span></div>
+    </div>
+  
+<!-- 뉴스 박스 추가 -->
+<div class="news-box">
+  <div class="news-content">
+    <!-- 추가할 텍스트 -->
+    <div class="news-text">
+      <span class="text-light">#주주님</span><br>
+      <span class="text-medium">#사전공모</span><br>
+      <span class="text-bold">#정보를드려요!</span>
+    </div>
+    <!-- 이미지 추가 -->
+    <img src="https://i.ibb.co/j3T1kHC/image.png" alt="뉴스 이미지" class="news-image">
+  </div>
+  
+        <!-- 뉴스 항목 텍스트 -->
+        <div class="news-items">
+          <a href="https://m.news.nate.com/view/20241017n43478" class="news-item">홍콩서도 인기 폭발… 4000억 '대박' 노린다</a>
+          <a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240411003511" class="news-item">[공시] 연결감사보고서</a>
+          <a href="https://news.nate.com/view/20241013n14222" class="news-item">백종원 더본코리아, 수요예측 나선다</a>
+      </div>
+  </div>
+
+  <div id="infoPopup" class="popup">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h2>증권세부정보</h2>
+      <div class="info-summary">
+        <div class="info-item"><h3>증권명</h3><p>더본코리아</p></div>
+        <div class="info-item"><h3>증권코드</h3><p>951070</p></div>
+        <div class="info-item"><h3>업종</h3><p>경영 컨설팅업</p></div>
+        <div class="info-item"><h3>대표이사</h3><p>백종원</p></div>
+        <div class="info-item"><h3>사업자등록번호</h3><p>211-86-00870</p></div>
+        <div class="info-item"><h3>주간사</h3><p>한국투자증권, NH투자증권</p></div>
+        <hr class="divider">
+        <div class="info-card">
+          <div class="info-item"><h3>MY 보유주수</h3><p class="shares-info-popup"></p></div>
+            <div class="info-item"><h3>MY 증권계좌</h3><p class="account-number-popup"></p></div> <!-- 수정된 부분 -->
+            <div class="info-item"><h3>MY 총 평가금액</h3><p class="total-value-popup"></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>COPYRIGHTⓒ 2017 THEBORN KOREA INC.<br>ALL RIGHTS RESERVED</p>
+</div>
+
+<script>
+fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector('.greeting').innerHTML = `${data.name}님, 정상 신고되어<br>있는 보유주수가 있어요!`;
+          document.querySelector('.account-name').innerText = `${data.name}님의 보유주수`;
+          document.querySelector('.account-number').innerText = `입고예정계좌 : ${data.accountNumber}`;
+          
+          const totalValue = data.shares * data.pricePerShare;
+          document.querySelector('.shares-value').innerHTML = `${totalValue.toLocaleString()}원 <span class="small-text">(평가금액)</span>`;
+          document.querySelector('.shares-info').innerText = `보유주수 : ${data.shares} 주`;
+          document.querySelector('.price-info').innerText = `1주의 가격 : ${data.pricePerShare.toLocaleString()} 원`;
+          
+          document.querySelector('.shares-info-popup').innerText = `${data.shares}주`;
+          document.querySelector('.account-number-popup').innerText = `${data.accountNumber}`; // 변경된 부분
+          document.querySelector('.total-value-popup').innerText = `${totalValue.toLocaleString()} 원`;
+          
+          const contactButton = document.getElementById('contactButton');
+          if (contactButton) {
+              contactButton.addEventListener('click', () => {
+                  window.location.href = `tel:${data.담당자연락처}`; 
+              });
+        }
+      })
+      .catch(error => {
+        console.error('데이터 로드 중 오류 발생:', error);
+        document.querySelector('.greeting').innerHTML = '회원님, 정상 신고되어<br>있는 보유주수가 있어요!';
+      });
+
+    document.querySelector('.action-button').addEventListener('click', () => {
+      const walletBox = document.querySelector('.wallet-box');
+      walletBox.scrollIntoView({ behavior: 'smooth' });
+      walletBox.style.animation = 'bounce 0.8s ease-in-out'; 
+      walletBox.addEventListener('animationend', () => walletBox.style.animation = '');
+    });
+
+    document.getElementById('infoButton').addEventListener('click', () => {
+      document.getElementById('infoPopup').style.display = 'block';
+    });
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+      document.getElementById('infoPopup').style.display = 'none';
+    });
+
+    window.onclick = function(event) {
+      if (event.target === document.getElementById('infoPopup')) {
+        document.getElementById('infoPopup').style.display = 'none';
+      }
+    }
+
+    function showTooltip(event) {
+        const tooltip = event.target.nextElementSibling; // 아이콘 다음의 요소(툴팁) 선택
+        const currentTimeElement = document.getElementById('current-time');
+
+        // 현재 날짜와 시간을 얻어오는 함수
+        function getCurrentDateTime() {
+          const now = new Date();
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          const seconds = String(now.getSeconds()).padStart(2, '0');
+          return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
+        }
+
+        // 툴팁 안에 현재 날짜와 시간을 업데이트
+        currentTimeElement.textContent = getCurrentDateTime();
+        
+        // 툴팁 보이기/숨기기 토글
+        tooltip.classList.toggle('show');
+
+        // 툴팁을 클릭하면 자동으로 숨김
+        setTimeout(() => {
+            tooltip.classList.remove('show'); // 일정 시간 후에 숨김
+        }, 3000); // 3초 후에 숨김
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // 스크롤을 감성적으로 부드럽게 처리
+    window.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      window.scrollBy({
+        top: event.deltaY * 0.7, // 스크롤 속도를 70%로 낮추어 부드럽게
+        behavior: "smooth"
+      });
+    }, { passive: false });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>더본코리아 공모 어카운트</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-face.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-family.css" />   
+    <meta property="og:title" content="더본코리아 공모 어카운트">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.ibb.co/LgrV37q/image.png">
+    <meta property="og:description" content="보유하고 계신 더본코리아 증권 내역을 안내드립니다.">
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.ibb.co/8Xc2SKJ/image.png" alt="Small Logo" class="logo">
+        <div class="greeting" id="greeting">NAME 회원님 안녕하세요.</div>
+        <img src="https://i.ibb.co/vcs3GxZ/image.png" alt="Title Logo" class="title-logo">
+        
+        <!-- 월렛 버튼 -->
+        <a href="#" id="walletButton">
+            <img src="https://i.ibb.co/gRc4jV2/image.png" alt="Wallet Button" class="wallet-button">
+        </a>
+
+        <!-- 작은 버튼 (하이퍼링크) -->
+        <a href="https://online.fliphtml5.com/iscio/rahk/" id="guidebookButton">
+            <img src="https://i.ibb.co/61SZ0fZ/2.png" alt="Guidebook Button" class="guidebook-button">
+        </a>
+    </div>
+
+    <!-- 로딩 스피너와 메시지 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div> <!-- 스피너 -->
+        <div class="loading-text" id="loadingText">주주 정보를<br>확인하는 중입니다...</div> <!-- 로딩 메시지 -->
+    </div>    
+
+    <script defer>
+        // JSON 데이터 불러오기
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const greetingElement = document.getElementById('greeting');
+                greetingElement.textContent = `${data.name} 회원님 안녕하세요.`;
+            })
+            .catch(error => {
+                console.error('Error loading JSON data:', error);
+                const greetingElement = document.getElementById('greeting');
+                greetingElement.textContent = '회원님 안녕하세요.';
+            });
+
+        // 월렛 버튼 클릭 시 로딩 스피너 표시 및 페이지 이동
+        document.getElementById('walletButton').addEventListener('click', function(event) {
+            event.preventDefault(); // 링크 기본 동작 방지
+            document.getElementById('loadingOverlay').style.display = 'flex'; // 로딩 오버레이 표시
+
+            setTimeout(() => {
+                window.location.href = 'wallet.html'; // 1.5초 후 페이지 이동
+            }, 1500);
+        });
+
+        // 가이드북 버튼 클릭 시 로딩 스피너 표시 및 외부 링크 이동
+        document.getElementById('guidebookButton').addEventListener('click', function(event) {
+            event.preventDefault(); // 링크 기본 동작 방지
+            document.getElementById('loadingOverlay').style.display = 'flex'; // 로딩 오버레이 표시
+            document.getElementById('loadingText').innerHTML = '가이드북을<br>불러오는 중입니다...'; // 다른 메시지
+
+            setTimeout(() => {
+                window.location.href = 'https://online.fliphtml5.com/iscio/rahk/'; // 올바른 링크로 이동
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

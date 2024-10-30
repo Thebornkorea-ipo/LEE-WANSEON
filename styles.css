@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('https://i.ibb.co/GsMg6gN/image.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'GmarketSans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1080px;
+    max-height: 1920px;
+}
+
+.logo {
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    width: 80px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 0.5s forwards;
+}
+
+.greeting {
+    position: absolute;
+    top: calc(25% - 55px);
+    left: 50%;
+    transform: translateX(-50%) scaleX(0.95);
+    font-size: 7vw;
+    color: #fff;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 0.8s forwards;
+    white-space: nowrap;
+    letter-spacing: -1.1px;
+    font-weight: 200;
+}
+
+.title-logo {
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 1.1s forwards;
+}
+
+.wallet-button {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 20px auto;
+    position: absolute;
+    top: calc(25% + 230px);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 1.6s forwards, emphasize 1.5s ease-in-out 2.1s infinite;
+    background: transparent;
+    border: none;
+}
+
+/* 가이드북 버튼 스타일 */
+.guidebook-button {
+    display: block;
+    width: 120px; /* 버튼 크기를 wallet-button보다 작게 조정 */
+    height: auto;
+    margin: 10px auto;
+    position: absolute;
+    top: calc(25% + 230px + 80px); /* 위치를 wallet-button 아래로 조정 */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 2.1s forwards;
+    background: transparent;
+    border: none;
+}
+
+/* 로딩 오버레이 스타일 */
+.loading-overlay {
+    display: none; /* 기본적으로 숨김 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 가운데 정렬 */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* 가장 위에 오도록 설정 */
+    width: 220px; /* 상자 너비 */
+    height: auto; /* 자동 높이 */
+    padding: 30px; /* 내부 여백 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.spinner {
+    border: 5px solid #c5c5c5; /* Light grey */
+    border-top: 5px solid #bf1f24; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px; /* 스피너와 메시지 사이의 여백 */
+}
+
+.loading-text {
+    font-weight: 00; /* 얇은 글씨 두께 설정 */
+    color: #000; /* 텍스트 색상 */
+    transform: scaleX(0.95); /* 가운데 정렬 */
+    letter-spacing: -1.1px;
+}
+
+/* 스피너 회전 애니메이션 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 깔끔한 오프닝 애니메이션 */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 강조 애니메이션 (버튼 커졌다 작아짐) */
+@keyframes emphasize {
+    0%, 100% { transform: translateX(-50%) scale(1); filter: brightness(1); }
+    50% { transform: translateX(-50%) scale(1.05); filter: brightness(1.08); }
+}
+
+/* PC 화면에서 요소 크기 조정 */
+@media (min-width: 1080px) {
+    .greeting { font-size: 2rem; }
+    .title-logo { width: 300px; }
+    .wallet-button { width: 200px; top: calc(27% + 300px); }
+
+    /* 가이드북 버튼 위치 조정 */
+    .guidebook-button {
+        top: calc(27% + 380px); /* 원하는 위치로 조정 */
+    }
+}
+
+/* 모바일 화면에서의 폰트 크기 조정 */
+@media (max-width: 600px) {
+    .greeting { font-size: 6vw; }
+}
